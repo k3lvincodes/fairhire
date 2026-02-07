@@ -12,9 +12,9 @@
   };
   
   const tierGradients = {
-    alpha: 'from-emerald-500 to-cyan-500',
-    trusted: 'from-amber-500 to-orange-500',
-    builder: 'from-neutral-600 to-neutral-500'
+    alpha: 'from-emerald-500 to-cyan-500 shadow-[0_0_10px_rgba(16,185,129,0.3)]',
+    trusted: 'from-amber-500 to-orange-500 shadow-[0_0_10px_rgba(245,158,11,0.3)]',
+    builder: 'from-brand-white/20 to-brand-white/5 border border-brand-white/10'
   };
 </script>
 

@@ -1,0 +1,25 @@
+{
+    "version": 1.1,
+    "atDirectives": [
+        {
+            "name": "@theme",
+            "description": "Used to configure your theme in CSS with Tailwind CSS v4"
+        },
+        {
+            "name": "@source",
+            "description": "Used to explicitly register content paths"
+        },
+        {
+            "name": "@utility",
+            "description": "Used to register new utility classes"
+        },
+        {
+            "name": "@variant",
+            "description": "Used to register new variants"
+        },
+        {
+            "name": "@apply",
+            "description": "Used to inline existing utilities into custom CSS"
+        }
+    ]
+}

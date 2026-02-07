@@ -15,7 +15,7 @@
     error: 'bg-red-500/20 border-red-500/30 text-red-400',
     warning: 'bg-amber-500/20 border-amber-500/30 text-amber-400',
     info: 'bg-cyan-500/20 border-cyan-500/30 text-cyan-400',
-    transaction: 'bg-purple-500/20 border-purple-500/30 text-purple-400'
+    transaction: 'bg-brand-purple/20 border-brand-purple/30 text-brand-purple'
   };
   
   const statusLabels = {

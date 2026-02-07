@@ -20,9 +20,9 @@
     builder: {
       label: 'Builder',
       sublabel: '<70',
-      color: 'text-neutral-400',
-      bg: 'bg-neutral-500/20',
-      border: 'border-neutral-500/30'
+      color: 'text-brand-white/40',
+      bg: 'bg-brand-white/5',
+      border: 'border-brand-white/10'
     }
   };
   

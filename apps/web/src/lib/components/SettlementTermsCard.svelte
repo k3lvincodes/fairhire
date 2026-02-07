@@ -38,18 +38,21 @@
     {config.title}
   </span>
 {:else}
-  <div class="{config.bg} border {config.border} rounded-xl p-5">
+  <div class="{config.bg} border {config.border} rounded-lg p-5 backdrop-blur-sm">
     <div class="flex items-center gap-3 mb-3">
-      <svg class="w-5 h-5 {config.color}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="{config.icon}"/>
-      </svg>
-      <h3 class="font-semibold {config.color}">{config.title}</h3>
+      <div class="p-2 rounded-lg bg-black/20">
+        <svg class="w-5 h-5 {config.color}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="{config.icon}"/>
+        </svg>
+      </div>
+      <h3 class="font-bold font-display {config.color}">{config.title}</h3>
     </div>
-    <p class="text-sm text-neutral-300">{config.description}</p>
+    <p class="text-sm text-brand-white/70 leading-relaxed">{config.description}</p>
     {#if userScore > 0}
-      <p class="text-sm text-neutral-400 mt-2">
-        Your FairScore: <strong class="text-white">{userScore}</strong>
-      </p>
+      <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between">
+        <span class="text-xs text-brand-white/50 uppercase tracking-widest font-semibold">Your FairScore</span>
+        <strong class="text-brand-white font-mono">{userScore}</strong>
+      </div>
     {/if}
   </div>
 {/if}

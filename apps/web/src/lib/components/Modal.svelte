@@ -36,23 +36,23 @@
 
 {#if open}
   <div 
-    class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm"
+    class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md"
     transition:fade={{ duration: 150 }}
     on:click={handleBackdropClick}
   >
     <div 
-      class="w-full {sizeClasses[size]} bg-neutral-900 border border-neutral-800 rounded-2xl shadow-2xl overflow-hidden"
+      class="w-full {sizeClasses[size]} bg-brand-black border border-brand-white/10 rounded-xl shadow-2xl flex flex-col max-h-[80vh]"
       transition:scale={{ duration: 150, start: 0.95 }}
     >
       <!-- Header -->
       {#if title}
-        <div class="flex items-center justify-between px-6 py-4 border-b border-neutral-800">
-          <h2 class="text-lg font-semibold">{title}</h2>
+        <div class="flex items-center justify-between px-6 py-5 border-b border-brand-white/10 flex-shrink-0">
+          <h2 class="text-lg font-bold font-display tracking-tight text-brand-white">{title}</h2>
           <button 
             on:click={close}
-            class="p-1 hover:bg-neutral-800 rounded-lg transition-colors"
+            class="p-2 hover:bg-brand-white/5 rounded-lg transition-colors text-brand-white/50 hover:text-brand-white"
           >
-            <svg class="w-5 h-5 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
             </svg>
           </button>
@@ -60,13 +60,13 @@
       {/if}
       
       <!-- Content -->
-      <div class="p-6">
+      <div class="p-6 overflow-y-auto">
         <slot />
       </div>
       
       <!-- Footer -->
       {#if $$slots.footer}
-        <div class="px-6 py-4 border-t border-neutral-800 bg-neutral-800/30">
+        <div class="px-6 py-4 border-t border-brand-white/10 bg-brand-white/5">
           <slot name="footer" />
         </div>
       {/if}
