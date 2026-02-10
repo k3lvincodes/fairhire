@@ -45,9 +45,10 @@
   <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-purple/10 rounded-full blur-[120px] -z-10 animate-pulse"></div>
   <div class="absolute bottom-0 left-0 w-[500px] h-[500px] bg-emerald-500/5 rounded-full blur-[120px] -z-10"></div>
 
-  <a href="/" class="absolute top-6 left-6 inline-flex items-center gap-2 text-brand-white/40 hover:text-brand-white transition-colors text-sm font-medium z-50">
+  <a href="/" class="absolute top-4 left-4 md:top-6 md:left-6 inline-flex items-center gap-2 text-brand-white/40 hover:text-brand-white transition-colors text-sm font-medium z-50">
     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
-    Back to Home
+    <span class="hidden sm:inline">Back to Home</span>
+    <span class="sm:hidden">Home</span>
   </a>
 
   <!-- Content -->
@@ -63,17 +64,17 @@
       Under Construction
     </div>
 
-    <h1 class="text-5xl md:text-7xl font-bold font-display mb-6 tracking-tight leading-tight">
+    <h1 class="text-4xl md:text-7xl font-bold font-display mb-6 tracking-tight leading-tight">
       Building the Future of <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-white to-brand-white/50">Fair Hiring</span>
     </h1>
 
-    <p class="text-xl text-brand-white/60 mb-12 max-w-lg mx-auto leading-relaxed">
+    <p class="text-lg md:text-xl text-brand-white/60 mb-12 max-w-lg mx-auto leading-relaxed px-4">
       We're crafting a revolutionary reputation-based work marketplace. Join the waitlist to be the first to know when we launch.
     </p>
 
     <!-- Email Form -->
     <!-- Email Form / Success State -->
-    <div class="bg-brand-white/5 p-2 rounded-xl border border-brand-white/10 backdrop-blur-md max-w-md mx-auto mb-12 flex flex-col sm:flex-row gap-2 transition-all focus-within:border-brand-purple/50 focus-within:ring-1 focus-within:ring-brand-purple/50 relative overflow-hidden">
+    <div class="bg-brand-white/5 p-2 rounded-xl border border-brand-white/10 backdrop-blur-md max-w-md mx-auto mb-12 flex flex-col sm:flex-row gap-2 transition-all focus-within:border-brand-purple/50 focus-within:ring-1 focus-within:ring-brand-purple/50 relative overflow-hidden mx-4 sm:mx-auto">
       {#if submitted}
         <div class="w-full h-full flex flex-col items-center justify-center py-4 animate-fade-in text-center">
             <h3 class="text-xl font-bold text-emerald-400 mb-2">You're on the list! 🎉</h3>

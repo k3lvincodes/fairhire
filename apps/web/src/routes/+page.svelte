@@ -11,8 +11,8 @@
         FairHire
       </div>
       <div class="flex items-center gap-6">
-        <a href="/app/tasks" class="text-brand-white/70 hover:text-brand-white transition-colors font-medium">Browse Tasks</a>
-        <a href="/app/tasks" class="px-5 py-2.5 bg-brand-white text-brand-black rounded-lg font-bold hover:bg-brand-white/90 transition-all shadow-[0_0_15px_rgba(255,255,255,0.2)]">
+        <a href="/app/tasks" class="hidden md:block text-brand-white/70 hover:text-brand-white transition-colors font-medium">Browse Tasks</a>
+        <a href="/app/tasks" class="px-5 py-2.5 bg-brand-white text-brand-black rounded-lg font-bold hover:bg-brand-white/90 transition-all shadow-[0_0_15px_rgba(255,255,255,0.2)] whitespace-nowrap">
           Launch App
         </a>
       </div>
@@ -29,19 +29,19 @@
         <span class="w-2 h-2 bg-emerald-400 rounded-full shadow-[0_0_10px_#34d399]"></span>
         Built on Solana
       </div>
-      <h1 class="text-6xl md:text-7xl font-bold leading-tight mb-8 font-display tracking-tight">
+      <h1 class="text-4xl md:text-7xl font-bold leading-tight mb-8 font-display tracking-tight">
         Get Paid Instantly.<br/>
         <span class="text-brand-purple">Reputation is Collateral.</span>
       </h1>
-      <p class="text-xl md:text-2xl text-brand-white/60 mb-10 leading-relaxed max-w-2xl font-light">
+      <p class="text-lg md:text-2xl text-brand-white/60 mb-10 leading-relaxed max-w-2xl font-light">
         The first reputation-gated work marketplace. High FairScore? Skip escrow and get paid the second you submit.
       </p>
       <div class="flex flex-wrap gap-4">
-        <a href="/app/tasks" class="px-8 py-4 bg-brand-white text-brand-black rounded-lg font-bold text-lg hover:bg-brand-white/90 transition-all shadow-lg flex items-center gap-2">
+        <a href="/app/tasks" class="w-full md:w-auto px-8 py-4 bg-brand-white text-brand-black rounded-lg font-bold text-lg hover:bg-brand-white/90 transition-all shadow-lg flex items-center justify-center gap-2">
           Start Earning
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
         </a>
-        <a href="/app/post" class="px-8 py-4 bg-brand-white/5 text-brand-white rounded-lg font-bold text-lg hover:bg-brand-white/10 transition-colors border border-brand-white/10 backdrop-blur-sm">
+        <a href="/app/post" class="w-full md:w-auto px-8 py-4 bg-brand-white/5 text-brand-white rounded-lg font-bold text-lg hover:bg-brand-white/10 transition-colors border border-brand-white/10 backdrop-blur-sm text-center">
           Post a Task
         </a>
       </div>
