@@ -57,3 +57,50 @@ input::-webkit-inner-spin-button {
 input[type=number] {
     -moz-appearance: textfield;
 }
+
+/* Scroll Animations */
+.animate-on-scroll {
+    opacity: 0;
+    transition: opacity 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* Default / Bottom Slide */
+.animate-on-scroll.slide-from-bottom {
+    transform: translateY(50px);
+}
+
+/* Left Slide */
+.animate-on-scroll.slide-from-left {
+    transform: translateX(-50px);
+}
+
+/* Right Slide */
+.animate-on-scroll.slide-from-right {
+    transform: translateX(50px);
+}
+
+.in-viewport {
+    opacity: 1;
+    transform: translate(0, 0) !important;
+}
+
+/* Staggered delays */
+.delay-100 {
+    transition-delay: 100ms;
+}
+
+.delay-200 {
+    transition-delay: 200ms;
+}
+
+.delay-300 {
+    transition-delay: 300ms;
+}
+
+.delay-400 {
+    transition-delay: 400ms;
+}
+
+.delay-500 {
+    transition-delay: 500ms;
+}
