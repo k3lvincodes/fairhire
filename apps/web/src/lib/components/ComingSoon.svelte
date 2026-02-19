@@ -1,5 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte';
+  import ParticleBackground from '$lib/components/ParticleBackground.svelte';
 
   let email = '';
   let submitted = false;
@@ -41,9 +42,13 @@
 </script>
 
 <div class="min-h-screen bg-brand-black text-brand-white flex flex-col items-center justify-center p-6 relative overflow-hidden">
-  <!-- Background Elements -->
-  <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-purple/10 rounded-full blur-[120px] -z-10 animate-pulse"></div>
-  <div class="absolute bottom-0 left-0 w-[500px] h-[500px] bg-emerald-500/5 rounded-full blur-[120px] -z-10"></div>
+  <!-- Particle Background -->
+  <div class="absolute inset-0 z-0">
+    <ParticleBackground />
+  </div>
+  <!-- Extra glow overlays for depth -->
+  <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-purple/10 rounded-full blur-[120px] z-[1] animate-pulse"></div>
+  <div class="absolute bottom-0 left-0 w-[500px] h-[500px] bg-emerald-500/5 rounded-full blur-[120px] z-[1]"></div>
 
   <a href="/" class="absolute top-4 left-4 md:top-6 md:left-6 inline-flex items-center gap-2 text-brand-white/40 hover:text-brand-white transition-colors text-sm font-medium z-50">
     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
