@@ -7,11 +7,15 @@
 <div class="flex h-screen bg-brand-black text-brand-white font-sans selection:bg-brand-purple selection:text-white">
   <!-- Sidebar (Desktop) -->
   <aside class="w-64 border-r border-brand-white/10 p-4 hidden md:flex flex-col bg-brand-black">
-    <a href="/app/tasks" class="mb-8 px-2 hover:opacity-80 transition-opacity flex items-center gap-2">
+    <a href="/" class="mb-8 px-2 hover:opacity-80 transition-opacity flex items-center gap-2">
       <img src="/logo.png" alt="FairHire" class="h-8 w-8 rounded-lg" />
       <span class="font-bold text-xl font-display tracking-tight">FairHire</span>
     </a>
     <nav class="space-y-1 flex-1">
+      <a href="/app/dashboard" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-brand-white/5 transition-colors {$page.url.pathname === '/app/dashboard' ? 'bg-brand-white/10 text-brand-white font-medium' : 'text-brand-white/60'}">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>
+        Dashboard
+      </a>
       <a href="/app/tasks" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-brand-white/5 transition-colors {$page.url.pathname.startsWith('/app/tasks') ? 'bg-brand-white/10 text-brand-white font-medium' : 'text-brand-white/60'}">
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
         Tasks
@@ -19,10 +23,6 @@
       <a href="/app/post" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-brand-white/5 transition-colors {$page.url.pathname === '/app/post' ? 'bg-brand-white/10 text-brand-white font-medium' : 'text-brand-white/60'}">
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 4v16m8-8H4"/></svg>
         Post Task
-      </a>
-      <a href="/app/dashboard" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-brand-white/5 transition-colors {$page.url.pathname === '/app/dashboard' ? 'bg-brand-white/10 text-brand-white font-medium' : 'text-brand-white/60'}">
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>
-        Dashboard
       </a>
       <a href="/app/profile" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-brand-white/5 transition-colors {$page.url.pathname === '/app/profile' ? 'bg-brand-white/10 text-brand-white font-medium' : 'text-brand-white/60'}">
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
@@ -49,7 +49,7 @@
   <main class="flex-1 flex flex-col overflow-hidden bg-brand-black">
     <!-- Header -->
     <header class="h-16 border-b border-brand-white/10 flex items-center justify-between px-4 bg-brand-black/80 backdrop-blur-md sticky top-0 z-30">
-      <a href="/app/tasks" class="md:hidden hover:opacity-80 transition-opacity">
+      <a href="/" class="md:hidden hover:opacity-80 transition-opacity">
         <img src="/logo.png" alt="FairHire" class="h-8 w-auto rounded-lg" />
       </a>
       <div class="flex-1 max-w-xl mx-4 hidden md:block">

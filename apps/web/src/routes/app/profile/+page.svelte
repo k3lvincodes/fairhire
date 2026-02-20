@@ -45,7 +45,7 @@
           <div class="flex items-center justify-center gap-3 mb-6">
             <div class="flex flex-col items-center">
               <span class="text-xs font-bold text-brand-white/40 uppercase tracking-wider mb-1">FairScore</span>
-              <FairScoreBadge score={$user.fairScore} size="lg" />
+              <FairScoreBadge score={$user.fairScore} size="lg" loading={$user.reputationLoading} error={$user.reputationError} />
             </div>
             <div class="w-px h-12 bg-brand-white/10"></div>
             <div class="flex flex-col items-center">

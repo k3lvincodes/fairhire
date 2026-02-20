@@ -1,7 +1,7 @@
 <script lang="ts">
   import Modal from './Modal.svelte';
   import SettlementTermsCard from './SettlementTermsCard.svelte';
-  import { user } from '$lib/stores/wallet';
+  import { user, reputationLoading } from '$lib/stores/wallet';
   import { toasts } from '$lib/stores/toast';
   import { createEventDispatcher } from 'svelte';
   
@@ -18,9 +18,10 @@
   const dispatch = createEventDispatcher();
   
   $: eligible = $user.fairScore >= task.minScore;
+  $: canClaim = eligible && !$reputationLoading;
   
   async function handleClaim() {
-    if (!eligible) return;
+    if (!canClaim) return;
     
     // Start transaction toast
     const tx = toasts.transaction('Claiming task...', 'mock-signature-12345');
@@ -52,31 +53,45 @@
     <SettlementTermsCard settlement={task.settlement} userScore={$user.fairScore} variant="full" />
     
     <!-- Eligibility Check -->
-    <div class="p-5 rounded-xl {eligible ? 'bg-emerald-500/10 border border-emerald-500/30' : 'bg-red-500/10 border border-red-500/30'}">
-      <div class="flex items-center gap-4">
-        {#if eligible}
-          <div class="w-10 h-10 rounded-full bg-emerald-500/20 flex items-center justify-center flex-shrink-0">
-            <svg class="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-            </svg>
+    {#if $reputationLoading}
+      <div class="p-5 rounded-xl bg-brand-white/5 border border-brand-white/10">
+        <div class="flex items-center gap-4">
+          <div class="w-10 h-10 rounded-full bg-brand-white/10 flex items-center justify-center flex-shrink-0 animate-pulse">
+            <div class="w-5 h-5 rounded-full bg-brand-white/20"></div>
           </div>
           <div>
-            <div class="font-bold text-emerald-400">You're eligible</div>
-            <div class="text-sm text-brand-white/80">Your FairScore ({$user.fairScore}) meets the minimum ({task.minScore})</div>
+            <div class="font-bold text-brand-white/60">Verifying your reputation...</div>
+            <div class="text-sm text-brand-white/40">Checking your FairScore against the minimum ({task.minScore})</div>
           </div>
-        {:else}
-          <div class="w-10 h-10 rounded-full bg-red-500/20 flex items-center justify-center flex-shrink-0">
-            <svg class="w-5 h-5 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-            </svg>
-          </div>
-          <div>
-            <div class="font-bold text-red-400">Not eligible</div>
-            <div class="text-sm text-brand-white/80">Your FairScore ({$user.fairScore}) is below the minimum ({task.minScore})</div>
-          </div>
-        {/if}
+        </div>
       </div>
-    </div>
+    {:else}
+      <div class="p-5 rounded-xl {eligible ? 'bg-emerald-500/10 border border-emerald-500/30' : 'bg-red-500/10 border border-red-500/30'}">
+        <div class="flex items-center gap-4">
+          {#if eligible}
+            <div class="w-10 h-10 rounded-full bg-emerald-500/20 flex items-center justify-center flex-shrink-0">
+              <svg class="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+            </div>
+            <div>
+              <div class="font-bold text-emerald-400">You're eligible</div>
+              <div class="text-sm text-brand-white/80">Your FairScore ({$user.fairScore}) meets the minimum ({task.minScore})</div>
+            </div>
+          {:else}
+            <div class="w-10 h-10 rounded-full bg-red-500/20 flex items-center justify-center flex-shrink-0">
+              <svg class="w-5 h-5 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+            </div>
+            <div>
+              <div class="font-bold text-red-400">Not eligible</div>
+              <div class="text-sm text-brand-white/80">Your FairScore ({$user.fairScore}) is below the minimum ({task.minScore})</div>
+            </div>
+          {/if}
+        </div>
+      </div>
+    {/if}
     
     <!-- Warning for Instant Pay -->
     {#if task.settlement === 'instant'}
@@ -105,10 +120,14 @@
     </button>
     <button 
       on:click={handleClaim}
-      disabled={!eligible}
+      disabled={!canClaim}
       class="px-6 py-2.5 bg-brand-white text-brand-black rounded-lg font-bold hover:bg-brand-white/90 transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5 disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:translate-y-0 disabled:shadow-none"
     >
-      Claim Task
+      {#if $reputationLoading}
+        Loading...
+      {:else}
+        Claim Task
+      {/if}
     </button>
   </div>
 </Modal>

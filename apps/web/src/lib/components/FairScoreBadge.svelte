@@ -1,8 +1,10 @@
 <script lang="ts">
   export let score: number = 0;
   export let size: 'sm' | 'md' | 'lg' = 'md';
+  export let loading: boolean = false;
+  export let error: string | null = null;
   
-  $: tier = score >= 85 ? 'alpha' : score >= 70 ? 'trusted' : 'builder';
+  $: tier = (score >= 85 ? 'alpha' : score >= 70 ? 'trusted' : 'builder') as 'alpha' | 'trusted' | 'builder';
   $: tierLabel = score >= 85 ? 'Alpha' : score >= 70 ? 'Trusted' : 'Builder';
   
   const sizeClasses = {
@@ -18,9 +20,28 @@
   };
 </script>
 
-<div 
-  class="rounded-full bg-gradient-to-br {tierGradients[tier]} flex items-center justify-center font-bold {sizeClasses[size]}"
-  title="FairScore: {score} ({tierLabel} Tier)"
->
-  {score}
-</div>
+{#if loading}
+  <!-- Loading skeleton -->
+  <div 
+    class="rounded-full bg-brand-white/10 flex items-center justify-center {sizeClasses[size]} animate-pulse"
+    title="Loading FairScore..."
+  >
+    <div class="w-3/5 h-1 bg-brand-white/20 rounded-full"></div>
+  </div>
+{:else if error && score === 0}
+  <!-- Error state -->
+  <div 
+    class="rounded-full bg-red-500/10 border border-red-500/30 flex items-center justify-center font-bold {sizeClasses[size]}"
+    title="FairScore unavailable: {error}"
+  >
+    <span class="text-red-400">?</span>
+  </div>
+{:else}
+  <!-- Normal state -->
+  <div 
+    class="rounded-full bg-gradient-to-br {tierGradients[tier]} flex items-center justify-center font-bold {sizeClasses[size]}"
+    title="FairScore: {score} ({tierLabel} Tier){error ? ` — ${error}` : ''}"
+  >
+    {score}
+  </div>
+{/if}

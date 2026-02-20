@@ -10,13 +10,13 @@
   <!-- Hero Section -->
   <header class="border-b border-brand-white/10 backdrop-blur-md sticky top-0 z-50 bg-brand-black/80">
     <nav class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-      <div class="font-bold text-2xl font-display tracking-tight flex items-center gap-2">
+      <a href="/" class="font-bold text-2xl font-display tracking-tight flex items-center gap-2 hover:opacity-80 transition-opacity">
         <img src="/logo.png" alt="FairHire" class="w-8 h-8 rounded-lg" />
         FairHire
-      </div>
+      </a>
       <div class="flex items-center gap-6">
         <a href="/app/tasks" class="hidden md:block text-brand-white/70 hover:text-brand-white transition-colors font-medium">Browse Tasks</a>
-        <a href="/app/tasks" class="px-5 py-2.5 bg-brand-white text-brand-black rounded-lg font-bold hover:bg-brand-white/90 transition-all shadow-[0_0_15px_rgba(255,255,255,0.2)] whitespace-nowrap">
+        <a href="/app/dashboard" class="px-5 py-2.5 bg-brand-white text-brand-black rounded-lg font-bold hover:bg-brand-white/90 transition-all shadow-[0_0_15px_rgba(255,255,255,0.2)] whitespace-nowrap">
           Launch App
         </a>
       </div>
@@ -62,7 +62,7 @@
         use:viewport 
         class="animate-on-scroll delay-300 flex flex-wrap gap-4"
       >
-        <a href="/app/tasks" class="w-full md:w-auto px-8 py-4 bg-brand-white text-brand-black rounded-lg font-bold text-lg hover:bg-brand-white/90 transition-all shadow-lg flex items-center justify-center gap-2">
+        <a href="/app/dashboard" class="w-full md:w-auto px-8 py-4 bg-brand-white text-brand-black rounded-lg font-bold text-lg hover:bg-brand-white/90 transition-all shadow-lg flex items-center justify-center gap-2">
           Start Earning
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
         </a>
@@ -230,7 +230,7 @@
         </p>
         <a 
           use:viewport 
-          href="/app/tasks" 
+          href="/app/dashboard" 
           class="animate-on-scroll delay-200 inline-flex px-8 py-4 bg-brand-white text-brand-black rounded-lg font-bold text-lg hover:bg-brand-white/90 transition-all shadow-xl hover:shadow-2xl hover:-translate-y-1"
         >
           Launch FairHire
@@ -243,10 +243,10 @@
   <!-- Footer -->
   <footer class="border-t border-brand-white/10 py-12 bg-brand-black/90 relative z-10">
     <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
-      <div class="font-bold text-xl font-display flex items-center gap-2">
+      <a href="/" class="font-bold text-xl font-display flex items-center gap-2 hover:opacity-80 transition-opacity">
          <img src="/logo.png" alt="FairHire" class="w-6 h-6 grayscale hover:grayscale-0 transition-all" />
          FairHire
-      </div>
+      </a>
       <div class="flex items-center gap-8 text-brand-white/40 text-sm font-medium">
         <a href="#" class="hover:text-brand-white transition-colors">Documentation</a>
         <a href="#" class="hover:text-brand-white transition-colors">GitHub</a>

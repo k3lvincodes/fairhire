@@ -59,9 +59,9 @@
   <!-- Content -->
   <div class="max-w-2xl w-full text-center relative z-10">
     <div class="mb-8 flex justify-center">
-      <div class="w-16 h-16 bg-brand-white/5 rounded-2xl flex items-center justify-center border border-brand-white/10 shadow-2xl backdrop-blur-sm">
+      <a href="/" class="w-16 h-16 bg-brand-white/5 rounded-2xl flex items-center justify-center border border-brand-white/10 shadow-2xl backdrop-blur-sm hover:scale-105 transition-transform">
         <img src="/logo.png" alt="FairHire" class="w-10 h-10 object-contain" />
-      </div>
+      </a>
     </div>
 
     <div class="inline-flex items-center gap-2 px-3 py-1 bg-brand-white/5 border border-brand-white/10 rounded-full text-brand-white/60 text-sm mb-8 font-mono backdrop-blur-sm">
