@@ -12,6 +12,8 @@ create extension if not exists pg_trgm;
 -- ============================================================
 create table if not exists users (
   wallet_address text primary key,
+  email text,
+  email_verified boolean default false,
   username text unique,
   display_name text,
   bio text,

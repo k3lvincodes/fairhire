@@ -116,11 +116,11 @@
   <!-- Mobile Filters Overlay -->
   {#if showFilters}
     <div class="fixed inset-0 z-50 lg:hidden" role="dialog" aria-modal="true">
-      <div class="absolute inset-0 bg-brand-black/80 backdrop-blur-sm" on:click={() => showFilters = false}></div>
+      <div class="absolute inset-0 bg-brand-black/80 backdrop-blur-sm" role="button" tabindex="-1" aria-label="Close filters" on:click={() => showFilters = false} on:keydown={(e) => e.key === 'Escape' && (showFilters = false)}></div>
       <div class="absolute inset-y-0 right-0 max-w-xs w-full bg-brand-black border-l border-brand-white/10 shadow-2xl p-6 overflow-y-auto">
         <div class="flex items-center justify-between mb-8">
           <h2 class="text-xl font-bold font-display text-brand-white">Filters</h2>
-          <button on:click={() => showFilters = false} class="text-brand-white/50 hover:text-brand-white">
+          <button on:click={() => showFilters = false} aria-label="Close filters" class="text-brand-white/50 hover:text-brand-white">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
           </button>
         </div>

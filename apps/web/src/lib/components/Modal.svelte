@@ -37,8 +37,12 @@
 {#if open}
   <div 
     class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md"
+    role="button"
+    tabindex="-1"
+    aria-label="Close modal"
     transition:fade={{ duration: 150 }}
     on:click={handleBackdropClick}
+    on:keydown={handleKeydown}
   >
     <div 
       class="w-full {sizeClasses[size]} bg-brand-black border border-brand-white/10 rounded-xl shadow-2xl flex flex-col max-h-[80vh]"
@@ -50,6 +54,7 @@
           <h2 class="text-lg font-bold font-display tracking-tight text-brand-white">{title}</h2>
           <button 
             on:click={close}
+            aria-label="Close"
             class="p-2 hover:bg-brand-white/5 rounded-lg transition-colors text-brand-white/50 hover:text-brand-white"
           >
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

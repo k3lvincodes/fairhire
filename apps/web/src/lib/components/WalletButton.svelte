@@ -1,10 +1,10 @@
 <script lang="ts">
-  import { wallet, user, connectWallet, disconnectWallet } from '$lib/stores/wallet';
+  import { wallet, user, openWalletModal, disconnectWallet } from '$lib/stores/wallet';
   
   let showMenu = false;
   
   function handleConnect() {
-    connectWallet();
+    openWalletModal();
   }
   
   function handleDisconnect() {

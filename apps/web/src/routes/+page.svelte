@@ -4,6 +4,16 @@
   import Typewriter from '$lib/components/Typewriter.svelte';
   import HeroBackground from '$lib/components/HeroBackground.svelte';
   import ParticleBackground from '$lib/components/ParticleBackground.svelte';
+  import { wallet, openWalletModal } from '$lib/stores/wallet';
+  import { goto } from '$app/navigation';
+
+  function handleLaunch() {
+    if ($wallet.connected) {
+      goto('/app/dashboard');
+    } else {
+      openWalletModal();
+    }
+  }
 </script>
 
 <div class="min-h-screen bg-brand-black text-brand-white selection:bg-brand-purple selection:text-white">
@@ -16,9 +26,9 @@
       </a>
       <div class="flex items-center gap-6">
         <a href="/app/tasks" class="hidden md:block text-brand-white/70 hover:text-brand-white transition-colors font-medium">Browse Tasks</a>
-        <a href="/app/dashboard" class="px-5 py-2.5 bg-brand-white text-brand-black rounded-lg font-bold hover:bg-brand-white/90 transition-all shadow-[0_0_15px_rgba(255,255,255,0.2)] whitespace-nowrap">
+        <button on:click={handleLaunch} class="px-5 py-2.5 bg-brand-white text-brand-black rounded-lg font-bold hover:bg-brand-white/90 transition-all shadow-[0_0_15px_rgba(255,255,255,0.2)] whitespace-nowrap">
           Launch App
-        </a>
+        </button>
       </div>
     </nav>
   </header>
@@ -62,10 +72,10 @@
         use:viewport 
         class="animate-on-scroll delay-300 flex flex-wrap gap-4"
       >
-        <a href="/app/dashboard" class="w-full md:w-auto px-8 py-4 bg-brand-white text-brand-black rounded-lg font-bold text-lg hover:bg-brand-white/90 transition-all shadow-lg flex items-center justify-center gap-2">
+        <button on:click={handleLaunch} class="w-full md:w-auto px-8 py-4 bg-brand-white text-brand-black rounded-lg font-bold text-lg hover:bg-brand-white/90 transition-all shadow-lg flex items-center justify-center gap-2">
           Start Earning
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
-        </a>
+        </button>
         <a href="/app/post" class="w-full md:w-auto px-8 py-4 bg-brand-white/5 text-brand-white rounded-lg font-bold text-lg hover:bg-brand-white/10 transition-colors border border-brand-white/10 backdrop-blur-sm text-center">
           Post a Task
         </a>
@@ -228,13 +238,13 @@
         >
           Connect your wallet and start building your on-chain reputation today.
         </p>
-        <a 
+        <button 
           use:viewport 
-          href="/app/dashboard" 
+          on:click={handleLaunch} 
           class="animate-on-scroll delay-200 inline-flex px-8 py-4 bg-brand-white text-brand-black rounded-lg font-bold text-lg hover:bg-brand-white/90 transition-all shadow-xl hover:shadow-2xl hover:-translate-y-1"
         >
           Launch FairHire
-        </a>
+        </button>
       </div>
     </section>
 
@@ -248,10 +258,10 @@
          FairHire
       </a>
       <div class="flex items-center gap-8 text-brand-white/40 text-sm font-medium">
-        <a href="#" class="hover:text-brand-white transition-colors">Documentation</a>
-        <a href="#" class="hover:text-brand-white transition-colors">GitHub</a>
-        <a href="#" class="hover:text-brand-white transition-colors">Discord</a>
-        <a href="#" class="hover:text-brand-white transition-colors">Terms</a>
+        <a href="/docs" class="hover:text-brand-white transition-colors">Documentation</a>
+        <a href="/github" class="hover:text-brand-white transition-colors">GitHub</a>
+        <a href="/discord" class="hover:text-brand-white transition-colors">Discord</a>
+        <a href="/terms" class="hover:text-brand-white transition-colors">Terms</a>
       </div>
       <div class="text-brand-white/20 text-sm">© 2026 FairHire. All rights reserved.</div>
     </div>

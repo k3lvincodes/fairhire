@@ -62,6 +62,7 @@
         </div>
         <button 
           on:click={() => toasts.remove(toast.id)}
+          aria-label="Dismiss"
           class="opacity-50 hover:opacity-100 transition-opacity"
         >
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
