@@ -10,9 +10,22 @@
         localConnectingTo = adapterName;
         localError = null;
         try {
+            // Step 1: Check if provider exists
+            const phantom = (window as any).phantom?.solana ?? (window as any).solana;
+            console.log('[MODAL] Phantom provider:', phantom);
+            console.log('[MODAL] window.phantom:', (window as any).phantom);
+            console.log('[MODAL] window.solana:', (window as any).solana);
+
+            if (!phantom && adapterName === 'Phantom') {
+                localError = 'Phantom not detected on window. Is the extension installed and enabled?';
+                return;
+            }
+
+            console.log('[MODAL] Calling selectAndConnectWallet...');
             await selectAndConnectWallet(adapterName);
-            // Modal closes itself via store upon success
+            console.log('[MODAL] Connection successful');
         } catch (err: any) {
+            console.error('[MODAL] Connection error:', err);
             localError = err.message || 'Connection failed';
         } finally {
             localConnectingTo = null;

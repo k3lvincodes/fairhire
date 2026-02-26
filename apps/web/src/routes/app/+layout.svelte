@@ -1,7 +1,7 @@
 <script lang="ts">
   import { page } from '$app/stores';
   import WalletButton from '$lib/components/WalletButton.svelte';
-  import { user } from '$lib/stores/wallet';
+  import { wallet, user } from '$lib/stores/wallet';
 </script>
 
 <div class="flex h-screen bg-brand-black text-brand-white font-sans selection:bg-brand-purple selection:text-white">

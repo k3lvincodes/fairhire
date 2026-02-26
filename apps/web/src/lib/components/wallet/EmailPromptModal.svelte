@@ -1,19 +1,10 @@
 <script lang="ts">
-    import { createClient } from '@supabase/supabase-js';
-    import { env } from '$env/dynamic/public';
     import { wallet, onboardingState } from '$lib/stores/wallet';
     import { fade, scale } from 'svelte/transition';
 
     let email = '';
     let loading = false;
     let localError: string | null = null;
-
-    // Isolated client so we don't overwrite the main wallet session
-    const otpSupabase = createClient(
-        env.PUBLIC_SUPABASE_URL, 
-        env.PUBLIC_SUPABASE_ANON_KEY, 
-        { auth: { persistSession: false } }
-    );
 
     async function handleSendOtp() {
         if (!email || !email.includes('@')) {
@@ -25,15 +16,16 @@
         localError = null;
 
         try {
-            const { error } = await otpSupabase.auth.signInWithOtp({
-                email,
-                options: {
-                    // Suppress redirect since we just want the code
-                    shouldCreateUser: true 
-                }
+            const res = await fetch('/api/auth/send-otp', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email })
             });
 
-            if (error) throw error;
+            if (!res.ok) {
+                const err = await res.json().catch(() => ({ error: 'Failed to send code' }));
+                throw new Error(err.error || 'Failed to send verification code');
+            }
 
             wallet.update(w => ({ ...w, email }));
             onboardingState.set('email_otp');
@@ -50,7 +42,7 @@
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <!-- svelte-ignore a11y-no-static-element-interactions -->
 <div 
-    class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-md"
+    class="fixed inset-0 z-[60] flex items-center justify-center bg-black/60 backdrop-blur-md"
     transition:fade={{ duration: 200 }}
 >
     <!-- Non-dismissible: no close button, propagation stops clicks -->

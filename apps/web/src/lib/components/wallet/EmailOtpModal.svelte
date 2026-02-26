@@ -1,21 +1,13 @@
 <script lang="ts">
     import { createClient } from '@supabase/supabase-js';
-    import { env } from '$env/dynamic/public';
+    import { PUBLIC_SUPABASE_URL, PUBLIC_SUPABASE_ANON_KEY } from '$env/static/public';
     import { wallet, onboardingState } from '$lib/stores/wallet';
-    import { supabase } from '$lib/supabase';
     import { fade, scale } from 'svelte/transition';
 
     let code = '';
     let loading = false;
     let localError: string | null = null;
     let email = $wallet.email || '';
-
-    // Isolated client so we don't overwrite the main wallet session
-    const otpSupabase = createClient(
-        env.PUBLIC_SUPABASE_URL, 
-        env.PUBLIC_SUPABASE_ANON_KEY, 
-        { auth: { persistSession: false } }
-    );
 
     async function handleVerifyOtp() {
         if (!code || code.length < 6) {
@@ -27,6 +19,13 @@
         localError = null;
 
         try {
+            // Create an isolated client inside the handler to avoid SSR fetch
+            const otpSupabase = createClient(
+                PUBLIC_SUPABASE_URL, 
+                PUBLIC_SUPABASE_ANON_KEY, 
+                { auth: { persistSession: false } }
+            );
+
             const { error: verifyError } = await otpSupabase.auth.verifyOtp({
                 email,
                 token: code,
@@ -35,15 +34,23 @@
 
             if (verifyError) throw verifyError;
 
-            // Verified successfully! Now save it to public.users using our primary SIWS session
-            const { error: dbError } = await supabase
-                .from('users')
-                .update({ email, email_verified: true })
-                .eq('wallet_address', $wallet.address);
+            // Save email to DB via server-side endpoint (bypasses RLS)
+            const res = await fetch('/api/user/update', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    wallet_address: $wallet.address,
+                    email,
+                    email_verified: true
+                })
+            });
 
-            if (dbError) throw dbError;
+            if (!res.ok) {
+                const err = await res.json().catch(() => ({ error: 'Failed to save email' }));
+                throw new Error(err.error || 'Failed to update profile');
+            }
 
-            wallet.update(w => ({ ...w, emailVerified: true }));
+            wallet.update(w => ({ ...w, email, emailVerified: true }));
             onboardingState.set('username');
 
         } catch (err: any) {
@@ -65,7 +72,7 @@
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <!-- svelte-ignore a11y-no-static-element-interactions -->
 <div 
-    class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-md"
+    class="fixed inset-0 z-[60] flex items-center justify-center bg-black/60 backdrop-blur-md"
     transition:fade={{ duration: 200 }}
 >
     <!-- Non-dismissible modal -->

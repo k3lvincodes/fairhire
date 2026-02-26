@@ -22,13 +22,12 @@
     </div>
 
     <!-- Empty State -->
-    <div class="bg-brand-white/[0.02] p-8 rounded-xl border border-dashed border-brand-white/10 text-center hover:bg-brand-white/[0.04] transition-colors">
-      <p class="text-brand-white/40 mb-3 font-medium">Looking for more work?</p>
-      <a href="/app/tasks" class="inline-flex items-center gap-2 text-brand-purple hover:text-brand-purple-hover font-bold transition-colors">
-        Browse Tasks
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
-      </a>
-    </div>
+    <a href="/app/tasks" class="block bg-brand-white/[0.02] p-8 rounded-xl border border-dashed border-brand-white/10 text-center hover:border-brand-purple/50 hover:bg-brand-purple/5 transition-all group">
+      <div class="w-14 h-14 mx-auto mb-4 rounded-full bg-brand-white/5 flex items-center justify-center group-hover:bg-brand-purple/20 transition-colors border border-brand-white/10">
+        <svg class="w-6 h-6 text-brand-white/40 group-hover:text-brand-purple transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+      </div>
+      <p class="text-brand-white font-bold group-hover:text-brand-purple transition-colors">Browse Tasks</p>
+    </a>
   </section>
 
   <!-- Poster View -->

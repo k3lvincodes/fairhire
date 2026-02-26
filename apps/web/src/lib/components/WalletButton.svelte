@@ -1,7 +1,9 @@
 <script lang="ts">
+  import { onMount, onDestroy } from 'svelte';
   import { wallet, user, openWalletModal, disconnectWallet } from '$lib/stores/wallet';
   
   let showMenu = false;
+  let wrapperEl: HTMLDivElement;
   
   function handleConnect() {
     openWalletModal();
@@ -21,18 +23,36 @@
       navigator.clipboard.writeText($wallet.address);
     }
   }
+
+  function handleWindowClick(e: MouseEvent) {
+    if (showMenu && wrapperEl && !wrapperEl.contains(e.target as Node)) {
+      showMenu = false;
+    }
+  }
+
+  onMount(() => {
+    window.addEventListener('click', handleWindowClick);
+  });
+
+  onDestroy(() => {
+    if (typeof window !== 'undefined') {
+      window.removeEventListener('click', handleWindowClick);
+    }
+  });
 </script>
 
 {#if $wallet.connected}
-  <div class="relative">
+  <div class="relative" bind:this={wrapperEl}>
     <button 
       on:click={toggleMenu}
       class="flex items-center gap-2 px-3 py-2 bg-brand-white/5 border border-brand-white/10 rounded-lg hover:bg-brand-white/10 transition-colors"
     >
       <div class="w-6 h-6 rounded-full bg-brand-purple flex items-center justify-center text-xs font-bold text-white shadow-[0_0_10px_rgba(108,59,170,0.5)]">
-        {$user.fairScore}
+        {$wallet.username ? $wallet.username.slice(0, 1).toUpperCase() : $user.fairScore}
       </div>
-      <span class="text-sm font-medium font-mono text-brand-white">{$wallet.shortAddress}</span>
+      <span class="text-sm font-mono text-brand-white/70">
+        {$wallet.shortAddress}
+      </span>
       <svg class="w-4 h-4 text-brand-white/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
       </svg>
@@ -44,11 +64,11 @@
         <div class="p-5 border-b border-brand-white/10">
           <div class="flex items-center gap-4 mb-4">
             <div class="w-12 h-12 rounded-full bg-brand-purple flex items-center justify-center text-lg font-bold text-white shadow-[0_0_15px_rgba(108,59,170,0.5)]">
-              {$user.fairScore}
+              {$wallet.username ? $wallet.username.slice(0, 1).toUpperCase() : $user.fairScore}
             </div>
             <div>
-              <div class="font-bold text-brand-white text-lg">FairScore: {$user.fairScore}</div>
-              <div class="text-xs text-brand-purple font-medium uppercase tracking-wider">{$user.tier} Tier</div>
+              <div class="font-bold text-brand-white text-lg">{$wallet.username ? `@${$wallet.username}` : 'Anonymous'}</div>
+              <div class="text-xs text-brand-purple font-medium uppercase tracking-wider">{$user.tier} Tier · Score {$user.fairScore}</div>
             </div>
           </div>
           <button 

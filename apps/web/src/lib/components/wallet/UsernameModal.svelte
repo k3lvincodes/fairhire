@@ -1,6 +1,5 @@
 <script lang="ts">
   import { wallet, onboardingState } from '$lib/stores/wallet';
-  import { supabase } from '$lib/supabase';
 
   let username = '';
   let isLoading = false;
@@ -16,26 +15,29 @@
     errorMsg = '';
 
     try {
-      const { error } = await supabase
-        .from('users')
-        .upsert({
+      const res = await fetch('/api/user/update', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
           wallet_address: $wallet.address,
           email: $wallet.email || null,
-          username: username.trim(),
-          updated_at: new Date().toISOString()
-        }, {
-          onConflict: 'wallet_address' 
-        });
+          username: username.trim()
+        })
+      });
 
-      if (error) {
-        if (error.code === '23505') { // Unique violation
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({ error: 'Failed to save profile' }));
+        if (res.status === 409) {
           errorMsg = 'Username is already taken.';
         } else {
-          errorMsg = `Error saving profile: ${error.message}`;
+          errorMsg = err.error || 'Error saving profile';
         }
         isLoading = false;
         return;
       }
+
+      // Update the store with the new username
+      wallet.update(w => ({ ...w, username: username.trim() }));
 
       // Transition to FairScore modal
       onboardingState.set('fairscore');
@@ -48,7 +50,7 @@
   }
 </script>
 
-<div class="fixed inset-0 z-50 flex items-center justify-center bg-brand-black/90 backdrop-blur-sm p-4">
+<div class="fixed inset-0 z-[60] flex items-center justify-center bg-brand-black/90 backdrop-blur-sm p-4">
   <div class="w-full max-w-md bg-brand-white/5 border border-brand-white/10 rounded-2xl p-8 shadow-2xl">
     <div class="text-center mb-6">
       <div class="w-16 h-16 bg-brand-purple/20 rounded-full flex items-center justify-center mx-auto mb-4 border border-brand-purple/30">

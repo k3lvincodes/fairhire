@@ -1,5 +1,6 @@
 import { json } from '@sveltejs/kit';
 import { fetchScore } from '$lib/services/fairscale';
+import { getAdminSupabase } from '$lib/server/supabase';
 import type { RequestEvent } from '@sveltejs/kit';
 
 /** Solana base58 address: 32-44 alphanumeric chars (no 0, O, I, l) */
@@ -18,6 +19,21 @@ export const GET = async ({ params }: RequestEvent) => {
 
     try {
         const result = await fetchScore(wallet);
+
+        // Sync score to DB server-side (bypasses RLS)
+        try {
+            const adminSupabase = getAdminSupabase();
+            await adminSupabase
+                .from('users')
+                .update({
+                    cached_fair_score: result.score,
+                    cached_tier: result.tier,
+                    updated_at: new Date().toISOString()
+                })
+                .eq('wallet_address', wallet);
+        } catch (e) {
+            console.error('[reputation] Server-side DB sync failed:', e);
+        }
 
         return json({
             score: result.score,

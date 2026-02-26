@@ -17,28 +17,28 @@
   $: shadowColor = isAlpha ? 'shadow-[0_0_30px_rgba(16,185,129,0.3)]' : isTrusted ? 'shadow-[0_0_30px_rgba(245,158,11,0.2)]' : '';
 </script>
 
-<div class="fixed inset-0 z-50 flex items-center justify-center bg-brand-black/95 backdrop-blur-md p-4">
-  <div class="w-full max-w-md bg-gradient-to-br from-brand-white/5 to-transparent border border-brand-white/10 rounded-3xl p-8 relative overflow-hidden">
+<div class="fixed inset-0 z-[60] flex items-center justify-center bg-brand-black/95 backdrop-blur-md p-4">
+  <div class="w-full max-w-sm bg-gradient-to-br from-brand-white/5 to-transparent border border-brand-white/10 rounded-2xl p-6 relative overflow-hidden">
     
     <!-- Background Glow -->
     <div class="absolute inset-0 z-0 flex items-center justify-center pointer-events-none opacity-50">
-      <div class="w-64 h-64 bg-brand-purple rounded-full blur-[100px]"></div>
+      <div class="w-48 h-48 bg-brand-purple rounded-full blur-[80px]"></div>
     </div>
 
     <div class="relative z-10 text-center">
-      <h2 class="text-3xl font-bold font-display text-brand-white mb-2">Your FairScore</h2>
-      <p class="text-brand-white/60 mb-8 max-w-xs mx-auto">
+      <h2 class="text-2xl font-bold font-display text-brand-white mb-1">Your FairScore</h2>
+      <p class="text-brand-white/60 mb-6 text-sm max-w-xs mx-auto">
         Your on-chain reputation unlocks dynamic escrow terms.
       </p>
 
-      <div class={`relative mx-auto w-48 h-48 rounded-full ${tierBg} flex items-center justify-center border ${tierBorder} mb-8 ${shadowColor}`}>
-        <div class="absolute inset-0 rounded-full border border-brand-white/10 m-2"></div>
+      <div class={`relative mx-auto w-36 h-36 rounded-full ${tierBg} flex items-center justify-center border ${tierBorder} mb-6 ${shadowColor}`}>
+        <div class="absolute inset-0 rounded-full border border-brand-white/10 m-1.5"></div>
         {#if $user.reputationLoading}
-          <div class="w-10 h-10 border-4 border-white/20 border-t-brand-purple rounded-full animate-spin"></div>
+          <div class="w-8 h-8 border-3 border-white/20 border-t-brand-purple rounded-full animate-spin"></div>
         {:else}
           <div class="text-center">
-            <div class="text-6xl font-bold font-display text-white mb-1">{$user.fairScore}</div>
-            <div class={`text-sm font-bold uppercase tracking-wider ${tierColor}`}>
+            <div class="text-5xl font-bold font-display text-white mb-0.5">{$user.fairScore}</div>
+            <div class={`text-xs font-bold uppercase tracking-wider ${tierColor}`}>
               {$user.tier} Tier
             </div>
           </div>
@@ -51,7 +51,7 @@
         </p>
       {/if}
 
-      <div class="bg-brand-black/50 border border-brand-white/5 rounded-xl p-4 mb-8 text-left">
+      <div class="bg-brand-black/50 border border-brand-white/5 rounded-lg p-3 mb-6 text-left">
         <h4 class="font-bold text-brand-white mb-1 text-sm flex items-center gap-2">
           {#if isAlpha}
             <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
@@ -77,7 +77,7 @@
 
       <button 
         on:click={completeOnboarding}
-        class="w-full py-4 bg-brand-white text-brand-black rounded-xl font-bold hover:bg-brand-white/90 transition-all shadow-[0_0_20px_rgba(255,255,255,0.2)]"
+        class="w-full py-3 bg-brand-white text-brand-black rounded-lg font-bold hover:bg-brand-white/90 transition-all shadow-[0_0_20px_rgba(255,255,255,0.2)]"
       >
         Enter Dashboard
       </button>

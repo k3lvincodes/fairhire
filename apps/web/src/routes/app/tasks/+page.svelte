@@ -16,14 +16,8 @@
   let claimModalOpen = false;
   let selectedTask: typeof tasks[0] | null = null;
   
-  // Placeholder for task data - will be replaced with store
-  let tasks = [
-    { id: '1', title: 'Fix Rust compilation error in DeFi protocol', price: 500, settlement: 'instant' as const, deadline: '2h', minScore: 85, poster: '0x12...3456' },
-    { id: '2', title: 'Design landing page for NFT marketplace', price: 1200, settlement: 'fast' as const, deadline: '3d', minScore: 70, poster: '0xAB...CD12' },
-    { id: '3', title: 'Write unit tests for Solana program', price: 300, settlement: 'escrow' as const, deadline: '1d', minScore: 50, poster: '0x34...5678' },
-    { id: '4', title: 'Audit smart contract for vulnerabilities', price: 2000, settlement: 'instant' as const, deadline: '5d', minScore: 90, poster: '0x99...EF01' },
-    { id: '5', title: 'Create Discord bot for NFT alerts', price: 150, settlement: 'escrow' as const, deadline: '2d', minScore: 40, poster: '0x56...7890' },
-  ];
+  export let data: import('./$types').PageData;
+  $: tasks = data.tasks;
   
   $: filteredTasks = tasks.filter(task => {
     if (filters.settlement !== 'all' && task.settlement !== filters.settlement) return false;
